@@ -28,6 +28,16 @@
 	<div class="pops">
         <img src="images/money.png" id="money">
         <p>Theresa just received a voucher.</p>
+        <div class="pops_buttons">
+        	<a href="#" class="pops_link">Link</a>
+        	<button class="pops_btn">Button</button>
+        </div>
+    </div>
+
+    <div class="banner">
+    	<button class="banner_btn">Obtener Accesso Instante</button>
+    	<p>a Bitcoin Trader Para El Siguiente</p>
+    	<button class="banner_btn">04:35</button>
     </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -82,19 +92,27 @@ $(document).ready(function() {
                     $(".pops").fadeOut(800);
                     pops.init();
                 }, 6000);
-            }, 30000);
+            }, random(4000, 12000));
         }
     };
-
+	    
     $(document).on('click', '.btn-container button', function() {
-    	pops.init();
+    	setTimeout(
+            function() {
+                pops.init();
+            },
+            24000);
     });
     
-    
-    $(".pops").click(function () {
-        clearTimeout(out);
-        $(".pops").hide();
-        pops.init();
+    // $(".pops").click(function () {
+    //     clearTimeout(out);
+    //     $(".pops").hide();
+    //     pops.init();
+    // });
+
+    $(document).on('click', '.pops_btn', function() {
+    	$(".banner").fadeToggle(300);
+    	$(".pops").toggleClass('move-up');
     });
 
 });
