@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="initial-scale=1, width=device-width" />
+	<link href="images/favicon.ico" rel="icon" type="image/ico" />
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<title>Facebook Casino Giveaway</title>
+</head>
+
+<body>
+
+	<div class="overlay-modal">
+		<div class="intro-modal">
+			<p class="gz">Congratulations!</p>
+			<p class="txt">Facebook has selected you as our lucky millionaire!</p>
+			<div class="btn-container btn-container_flex">
+				<button>Yes, I want to be a millionaire!</button>
+				<a href="http://facebook.com/">No, give my money to someone else</a>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="pops">
+        <img src="images/money.png" id="money">
+        <p>Theresa just received a voucher.</p>
+    </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ion-sound/3.0.7/js/ion.sound.min.js"></script>
+<script type="text/javascript">
+var pop_names = ["Barbara", "Rachel", "Christina", "Teresa", "Fiona", "Margaret", "Bridie", "Lynda", "Rosaleen", "Karen", "Theresa", "Brenda", "Ursula", "Geraldine", "Deirdre", "Eilish", "Mary", "Lucy"];
+
+function random(min, max) {
+    return Math.round(Math.random() * (max - min) + min);
+}
+
+function checkZero(a) {
+	return a < 10 ? "0"+a : a;
+}
+
+$(document).ready(function() {
+
+	ion.sound({
+	    sounds: [
+	        {name: "alert"}
+	    ],
+
+	    path: "audio/",
+	    preload: false,
+	    multiplay: false,
+	    volume: 1
+	});
+
+	ion.sound.play("alert");
+
+	$(".overlay-modal").fadeIn(250);
+
+	$(document).on('click', '.btn-container button', function() {
+		$(this).parent().parent().parent().fadeOut(250, function() {
+			$(".intro-modal").hide();
+			$(".exit-modal").show();
+		});
+	});
+
+	$(document).on('click', '.cta', function() {
+		$(".overlay-modal").fadeIn(250);
+	});
+
+    var out,pops = {
+        init: function(){
+            setTimeout(function () {
+                var rand_name = pop_names[random(0,pop_names.length-1)];
+                var text = rand_name + " just cashed $"+random(18,163)+"."+checkZero(random(0,99))+" on our website!";
+                $(".pops p").html(text);
+                $(".pops").fadeIn(300);
+                out = setTimeout(function () {
+                    $(".pops").fadeOut(800);
+                    pops.init();
+                }, 6000);
+            }, 30000);
+        }
+    };
+
+    $(document).on('click', '.btn-container button', function() {
+    	pops.init();
+    });
+    
+    
+    $(".pops").click(function () {
+        clearTimeout(out);
+        $(".pops").hide();
+        pops.init();
+    });
+
+});
+</script>
+</body>
+
+</html>
