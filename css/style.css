@@ -54,7 +54,7 @@ table {
 }
 /* For IE 6/7 (trigger hasLayout) */
 .clearfix {
-    zoom:1;
+    zoom: 1;
 }
 
 /* STYLE */
@@ -133,7 +133,7 @@ body {
 	flex-direction:  column;
 }
 
-.btn-container button, .btn-container a {
+.btn-container button {
 	text-decoration: none;
 	text-align: center;
 	outline: 0;
@@ -155,7 +155,7 @@ body {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3b5998', endColorstr='#2a416d',GradientType=0 ); /* IE6-9 */
 }
 
-.btn-container a {
+.btn-container .no_btn {
 	background: #8b9dc3;
 	border:  none;
 }

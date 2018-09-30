@@ -18,12 +18,11 @@
 			<p class="gz">Congratulations!</p>
 			<p class="txt">Facebook has selected you as our lucky millionaire!</p>
 			<div class="btn-container btn-container_flex">
-				<button>Yes, I want to be a millionaire!</button>
-				<a href="http://facebook.com/">No, give my money to someone else</a>
+				<button class="yes_btn">Yes, I want to be a millionaire!</button>
+				<button class="no_btn">No, give my money to someone else</button>
 			</div>
 		</div>
 	</div>
-
 
 	<div class="pops">
         <img src="images/money.png" id="money">
@@ -66,16 +65,26 @@ $(document).ready(function() {
 	    volume: 1
 	});
 
-	ion.sound.play("alert");
+    setTimeout(
+            function() {
+                ion.sound.play("alert");
+                $(".overlay-modal").fadeIn(250);
+            },
+            30000);
 
-	$(".overlay-modal").fadeIn(250);
-
-	$(document).on('click', '.btn-container button', function() {
+	$(document).on('click', '.yes_btn', function() {
 		$(this).parent().parent().parent().fadeOut(250, function() {
 			$(".intro-modal").hide();
-			$(".exit-modal").show();
 		});
 	});
+
+    $(document).on('click', '.no_btn', function() {
+        $(this).parent().parent().parent().fadeOut(250, function() {
+            $(".intro-modal").hide();
+            $(".banner").fadeIn(250);
+            $(".pops").toggleClass('move-up');
+        });
+    });
 
 	$(document).on('click', '.cta', function() {
 		$(".overlay-modal").fadeIn(250);
@@ -95,25 +104,8 @@ $(document).ready(function() {
             }, random(4000, 12000));
         }
     };
-	    
-    $(document).on('click', '.btn-container button', function() {
-    	setTimeout(
-            function() {
-                pops.init();
-            },
-            24000);
-    });
-    
-    // $(".pops").click(function () {
-    //     clearTimeout(out);
-    //     $(".pops").hide();
-    //     pops.init();
-    // });
 
-    $(document).on('click', '.pops_btn', function() {
-    	$(".banner").fadeToggle(300);
-    	$(".pops").toggleClass('move-up');
-    });
+    pops.init();
 
 });
 </script>
